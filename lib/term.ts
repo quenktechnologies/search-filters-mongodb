@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Object, Value } from '@quenk/noni/lib/data/json';
 import { Except } from '@quenk/noni/lib/control/error';
 import { right } from '@quenk/noni/lib/data/either';
@@ -99,6 +100,30 @@ export class Regex {
 
 }
 
+/**
+ * Date condition
+ */
+export class Date {
+
+    constructor(
+        public field: string,
+        public operator: string,
+        public value: Value) { }
+
+    compile(): Except<Object> {
+
+        let d = moment(String(this.value)).startOf('day');
+
+        return right({
+            [this.field]: {
+                [ops[this.operator]]: <Object><object>d.toDate()
+            }
+        });
+
+    }
+
+}
+
 const escapeR = (value: Value) => {
 
     let s = String(value);
@@ -137,3 +162,10 @@ export const operator =
 export const regex =
     (_: Context<Value>, { field, operator, value }: FilterInfo<Value>)
         : Term<Object> => new Regex(field, operator, value);
+
+/**
+ * date term provider
+ */
+export const date =
+    (_: Context<Value>, { field, operator, value }: FilterInfo<Value>)
+        : Term<Object> => new Date(field, operator, value);

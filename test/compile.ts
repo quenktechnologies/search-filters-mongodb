@@ -3,7 +3,7 @@ import * as must from 'must/register';
 import { Object } from '@quenk/noni/lib/data/json';
 import { tests } from '@quenk/facets-dsl/lib/tests';
 import { Context } from '@quenk/facets-dsl/lib/compile/context';
-import { regex, operator } from '../src/term';
+import { regex, date, operator } from '../src/term';
 import { defaultTerms, compile } from '../src';
 
 const policies = {
@@ -103,7 +103,7 @@ const policies = {
 
         type: 'string',
         operators: ['=', '>=', '<=', '<=', '>=', '<', '>'],
-        term: operator
+        term: date
 
     }
 
@@ -132,7 +132,7 @@ function makeTest(test, index) {
         compile(ctx, test.input)
             .map(o => {
 
-                fs.writeFileSync(`./test/expectations/${file}.mongo`,
+                fs.writeFileSync(`./test/expectations/${file}.json`,
                     JSON.stringify(o));
 
             })
@@ -144,7 +144,7 @@ function makeTest(test, index) {
             .map(o => {
 
                 compare(JSON.stringify(o),
-                    fs.readFileSync(`./test/expectations/${file}.mongo`, {
+                    fs.readFileSync(`./test/expectations/${file}.json`, {
                         encoding: 'utf8'
                     }));
 

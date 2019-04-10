@@ -45,6 +45,16 @@ export declare class Regex {
     compile(): Except<Object>;
 }
 /**
+ * Date condition
+ */
+export declare class Date {
+    field: string;
+    operator: string;
+    value: Value;
+    constructor(field: string, operator: string, value: Value);
+    compile(): Except<Object>;
+}
+/**
  * and Term provider.
  */
 export declare const and: (_: Context<Object>, left: Term<Object>, right: Term<Object>) => Term<Object>;
@@ -64,3 +74,7 @@ export declare const operator: (_: Context<Value>, { field, operator, value }: F
  * regex term provider
  */
 export declare const regex: (_: Context<Value>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
+/**
+ * date term provider
+ */
+export declare const date: (_: Context<Value>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;

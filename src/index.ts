@@ -1,10 +1,10 @@
-import { Object  } from '@quenk/noni/lib/data/json';
+import { Object } from '@quenk/noni/lib/data/json';
 import { Except } from '@quenk/noni/lib/control/error';
 import { TermConstructors } from '@quenk/facets-dsl/lib/compile/term';
 import { Policies } from '@quenk/facets-dsl/lib/compile/context/policy';
 import { Context } from '@quenk/facets-dsl/lib/compile/context';
 import { Source, source2Term } from '@quenk/facets-dsl/lib/compile';
-import { and, or, empty, operator, regex } from './term';
+import { and, or, empty, operator, regex,date } from './term';
 
 /**
  * defaultTerms for supporting the DSL.
@@ -21,7 +21,7 @@ export const defaultPolicies: Policies<Object> = {
     number: {
 
         type: 'number',
-        operators: ['=', '>=', '>=', '<=', '>=', '<', '>'],
+        operators: ['=', '>=', '<=', '<=', '>=', '<', '>'],
         term: operator
 
     },
@@ -35,8 +35,8 @@ export const defaultPolicies: Policies<Object> = {
     date: {
 
         type: 'string',
-        operators: ['=', '>=', '>=', '<=', '>=', '<', '>'],
-        term: operator
+        operators: [,'=', '>=', '<=', '<=', '>=', '<', '>'],
+        term: date
 
     }
 

@@ -1,5 +1,5 @@
 {
-  "name": "@quenk/facets-mysql",
+  "name": "@quenk/facets-mongodb",
   "version": "0.0.1",
   "description": "Compiles a string into a MongoDB query filter",
   "main": "lib/index.js",

@@ -1,0 +1,1 @@
+{"$or":[{"tag":{"$regex":"old"}},{"tag":{"$regex":"new"}}]}

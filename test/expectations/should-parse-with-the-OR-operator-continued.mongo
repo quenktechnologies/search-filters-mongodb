@@ -1,0 +1,1 @@
+{"$or":[{"$or":[{"$or":[{"tag":{"$regex":"old"}},{"tag":{"$regex":"new"}}]},{"user":{"$regex":"grandma"}}]},{"filetype":{"$regex":"jpeg"}}]}

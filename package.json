@@ -1,0 +1,27 @@
+{
+  "name": "@quenk/facets-mysql",
+  "version": "0.0.1",
+  "description": "Compiles a string into a MongoDB query filter",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rm -R lib/*",
+    "build": "./node_modules/.bin/tsc -p src",
+    "test": "./node_modules/.bin/mocha --opts mocha.opts test/compile.ts"
+  },
+  "author": "Lasana Murray <dev@quenk.com> (http://quenk.com)",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.18",
+    "jison": "^0.4.17",
+    "mocha": "^3.3.0",
+    "must": "^0.13.4",
+    "ts-node": "^3.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "@quenk/facets-dsl": "^1.0.6"
+  }
+}

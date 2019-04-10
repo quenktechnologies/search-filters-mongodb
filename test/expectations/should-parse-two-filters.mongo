@@ -1,0 +1,1 @@
+{"$and":[{"type":{"$regex":"c"}},{"name":{"$regex":"johan"}}]}

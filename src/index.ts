@@ -4,7 +4,7 @@ import { TermConstructors } from '@quenk/facets-dsl/lib/compile/term';
 import { Policies } from '@quenk/facets-dsl/lib/compile/context/policy';
 import { Context } from '@quenk/facets-dsl/lib/compile/context';
 import { Source, source2Term } from '@quenk/facets-dsl/lib/compile';
-import { and, or, empty, operator, regex,date } from './term';
+import { and, or, empty, operator, regex, date } from './term';
 
 /**
  * defaultTerms for supporting the DSL.
@@ -29,13 +29,20 @@ export const defaultPolicies: Policies<Object> = {
 
         type: 'string',
         operators: ['='],
+        term: operator
+
+    },
+    match: {
+
+        type: 'string',
+        operators: ['='],
         term: regex
 
     },
     date: {
 
         type: 'string',
-        operators: [,'=', '>=', '<=', '<=', '>=', '<', '>'],
+        operators: [ '=', '>=', '<=', '<=', '>=', '<', '>'],
         term: date
 
     }

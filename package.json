@@ -1,6 +1,6 @@
 {
   "name": "@quenk/facets-mongodb",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Compiles a string into a MongoDB query filter",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

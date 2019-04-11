@@ -69,12 +69,12 @@ export declare const empty: () => Term<Object>;
 /**
  * operator Term provider.
  */
-export declare const operator: (_: Context<Value>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
+export declare const operator: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
 /**
  * regex term provider
  */
-export declare const regex: (_: Context<Value>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
+export declare const regex: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
 /**
  * date term provider
  */
-export declare const date: (_: Context<Value>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
+export declare const date: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;

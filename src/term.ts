@@ -153,19 +153,19 @@ export const empty = (): Term<Object> => new Empty();
  * operator Term provider.
  */
 export const operator =
-    (_: Context<Value>, { field, operator, value }: FilterInfo<Value>)
+    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
         : Term<Object> => new Operator(field, operator, value);
 
 /**
  * regex term provider
  */
 export const regex =
-    (_: Context<Value>, { field, operator, value }: FilterInfo<Value>)
+    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
         : Term<Object> => new Regex(field, operator, value);
 
 /**
  * date term provider
  */
 export const date =
-    (_: Context<Value>, { field, operator, value }: FilterInfo<Value>)
+    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
         : Term<Object> => new Date(field, operator, value);

@@ -94,7 +94,17 @@ export class Regex {
 
     compile(): Except<Object> {
 
-        return right({ [this.field]: { $regex: escapeR(this.value) } });
+        return right({
+
+            [this.field]: {
+
+                $regex: escapeR(this.value),
+
+                $options: 'i'
+
+            }
+
+        });
 
     }
 

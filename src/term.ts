@@ -122,7 +122,7 @@ export class Date {
 
     compile(): Except<Object> {
 
-        let d = moment(String(this.value)).startOf('day');
+        let d = moment.utc(String(this.value)).startOf('day');
 
         return right({
             [this.field]: {

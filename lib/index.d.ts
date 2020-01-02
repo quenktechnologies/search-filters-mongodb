@@ -1,4 +1,5 @@
 import { Object } from '@quenk/noni/lib/data/json';
+import { Except } from '@quenk/noni/lib/control/error';
 import { TermConstructors } from '@quenk/facets-dsl/lib/compile/term';
 import { Policies } from '@quenk/facets-dsl/lib/compile/context/policy';
 import { Context } from '@quenk/facets-dsl/lib/compile/context';
@@ -19,4 +20,4 @@ export declare const defaultOptions: {
 /**
  * compile a string into a MongoDB query object.
  */
-export declare const compile: (ctx: Context<Object>, source: string) => import("@quenk/noni/lib/data/either").Either<import("@quenk/noni/lib/control/error").Err, Object>;
+export declare const compile: (ctx: Context<Object>, source: string) => Except<Object>;

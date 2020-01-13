@@ -23,7 +23,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "@quenk/facets-dsl": "^1.0.10",
+    "@quenk/facets-dsl": "^1.1.0",
     "@quenk/noni": "^1.35.2",
     "moment": "^2.24.0"
   }

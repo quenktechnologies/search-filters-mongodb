@@ -1,1 +1,1 @@
-{"$and":[{"$and":[{"$and":[{"$and":[{"age":{"$gt":14}},{"rank":{"$lt":23}}]},{"price":{"$gte":22.4}}]},{"discount":{"$lte":5.4}}]},{"name":{"$regex":"Product name","$options":"i"}}]}
+{"$and":[{"age":{"$gt":14}},{"rank":{"$lt":23}},{"price":{"$gte":22.4}},{"discount":{"$lte":5.4}},{"name":{"$regex":"Product name","$options":"i"}}]}

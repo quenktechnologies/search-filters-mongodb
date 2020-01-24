@@ -1,1 +1,1 @@
-{"$and":[{"$and":[{"type":{"$regex":"c"}},{"name":{"$regex":"johan","$options":"i"}}]},{"active":{"$eq":false}}]}
+{"$and":[{"type":{"$regex":"c"}},{"name":{"$regex":"johan","$options":"i"}},{"active":{"$eq":false}}]}

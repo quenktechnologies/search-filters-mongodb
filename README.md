@@ -69,7 +69,21 @@ let mfc = new MongoDBFilterCompiler();
 
 let eResult = mfc.compile(qry);
 
-console.error(eResult.takeRight()); // Throws an error if compilation failed.
+/* Logs the below or throws if an error occured. 
+  {"$and":
+    [
+       {
+         "$or":[
+            {"name":{"$regex":"sana", $options:"i"}},
+            {"name":{"$regex":"Murr", $options:"i"}}
+          ]
+        },
+        {"age":{"$gt":20}},
+        {"status":{"$eq":1}}
+    ]
+   }
+*/
+console.log(eResult.takeRight());
 
 ```
 

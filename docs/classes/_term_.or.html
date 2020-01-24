@@ -98,9 +98,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_term_.or.html#connective" class="tsd-kind-icon">connective</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_term_.or.html#left" class="tsd-kind-icon">left</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_term_.or.html#right" class="tsd-kind-icon">right</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_term_.or.html#lhs" class="tsd-kind-icon">lhs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_term_.or.html#rhs" class="tsd-kind-icon">rhs</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_term_.or.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
@@ -119,23 +118,23 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Or<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Term</span>, right<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Term</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_term_.or.html" class="tsd-signature-type">Or</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Or<span class="tsd-signature-symbol">(</span>lhs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Term</span>, rhs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Term</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_term_.or.html" class="tsd-signature-type">Or</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L54">term.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/term.ts#L58">term.ts:58</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>left: <span class="tsd-signature-type">Term</span></h5>
+									<h5>lhs: <span class="tsd-signature-type">Term</span></h5>
 								</li>
 								<li>
-									<h5>right: <span class="tsd-signature-type">Term</span></h5>
+									<h5>rhs: <span class="tsd-signature-type">Term</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_term_.or.html" class="tsd-signature-type">Or</a></h4>
@@ -145,47 +144,36 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-					<a name="connective" class="tsd-anchor"></a>
-					<h3>connective</h3>
-					<div class="tsd-signature tsd-kind-icon">connective<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;$or&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="lhs" class="tsd-anchor"></a>
+					<h3>lhs</h3>
+					<div class="tsd-signature tsd-kind-icon">lhs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Term</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="_term_.and.html">And</a>.<a href="_term_.and.html#connective">connective</a></p>
+						<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#lhs">lhs</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L87">term.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/term.ts#L60">term.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="left" class="tsd-anchor"></a>
-					<h3>left</h3>
-					<div class="tsd-signature tsd-kind-icon">left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Term</span></div>
+					<a name="rhs" class="tsd-anchor"></a>
+					<h3>rhs</h3>
+					<div class="tsd-signature tsd-kind-icon">rhs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Term</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#left">left</a></p>
+						<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#rhs">rhs</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L56">term.ts:56</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="right" class="tsd-anchor"></a>
-					<h3>right</h3>
-					<div class="tsd-signature tsd-kind-icon">right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Term</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#right">right</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L56">term.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/term.ts#L60">term.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="type" class="tsd-anchor"></a>
 					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;and&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = TYPE_OR</span></div>
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_term_.and.html">And</a>.<a href="_term_.and.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L85">term.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/term.ts#L105">term.ts:105</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +191,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_term_.and.html">And</a>.<a href="_term_.and.html#compile">compile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/747ad9a/lib/term.ts#L58">term.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/term.ts#L62">term.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -251,14 +239,11 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 								<a href="_term_.or.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-								<a href="_term_.or.html#connective" class="tsd-kind-icon">connective</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_term_.or.html#lhs" class="tsd-kind-icon">lhs</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_term_.or.html#left" class="tsd-kind-icon">left</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_term_.or.html#right" class="tsd-kind-icon">right</a>
+								<a href="_term_.or.html#rhs" class="tsd-kind-icon">rhs</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_term_.or.html#type" class="tsd-kind-icon">type</a>
@@ -272,6 +257,21 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="../modules/_term_.html#term" class="tsd-kind-icon">Term</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_term_.html#type_and" class="tsd-kind-icon">TYPE_<wbr>AND</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_term_.html#type_filter" class="tsd-kind-icon">TYPE_<wbr>FILTER</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_term_.html#type_match" class="tsd-kind-icon">TYPE_<wbr>MATCH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_term_.html#type_match_ci" class="tsd-kind-icon">TYPE_<wbr>MATCH_<wbr>CI</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_term_.html#type_or" class="tsd-kind-icon">TYPE_<wbr>OR</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
 						<a href="../modules/_term_.html#nativeops" class="tsd-kind-icon">native<wbr>Ops</a>

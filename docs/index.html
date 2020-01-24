@@ -162,7 +162,21 @@ let mfc = new MongoDBFilterCompiler();
 
 let eResult = mfc.compile(qry);
 
-console.error(eResult.takeRight()); // Throws an error if compilation failed.
+/* Logs the below or throws if an error occured. 
+  {&quot;$and&quot;:
+    [
+       {
+         &quot;$or&quot;:[
+            {&quot;name&quot;:{&quot;$regex&quot;:&quot;sana&quot;, $options:&quot;i&quot;}},
+            {&quot;name&quot;:{&quot;$regex&quot;:&quot;Murr&quot;, $options:&quot;i&quot;}}
+          ]
+        },
+        {&quot;age&quot;:{&quot;$gt&quot;:20}},
+        {&quot;status&quot;:{&quot;$eq&quot;:1}}
+    ]
+   }
+*/
+console.log(eResult.takeRight());
 </code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>

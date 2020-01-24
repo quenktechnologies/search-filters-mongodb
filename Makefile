@@ -6,7 +6,7 @@ lib: $(shell find src -type f)
 	./node_modules/.bin/tsc --project lib
 
 # Generate typedoc documentation.
-.PHONY: docs
+.PHONY:
 docs: 
 	./node_modules/.bin/typedoc \
 	--mode modules \
@@ -14,6 +14,6 @@ docs:
 	--excludeExternals \
 	--excludeNotExported \
 	--excludePrivate \
-	--tsconfig lib/tsconfig.json \
+	--tsconfig lib/tsconfig.json
 	echo 'DO NOT DELETE!' > docs/.nojekyll 
 

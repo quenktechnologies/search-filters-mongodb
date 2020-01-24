@@ -1,8 +1,19 @@
 import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import { right } from '@quenk/noni/lib/data/either';
-import { Term, FilterInfo } from '@quenk/search-filters/lib/compile/term';
-import { Context } from '@quenk/search-filters/lib/compile';
+import {
+    FieldName,
+    Operator,
+    Term as ITerm,
+    TermFactory
+} from '@quenk/search-filters/lib/compile/term';
+
+export { FieldName, Operator }
+
+/**
+ * Term type specialised for this module.
+ */
+export type Term = ITerm<Object>;
 
 /**
  * nativeOps maps the supported search-filters operators to mongodb operators.
@@ -23,7 +34,7 @@ export const nativeOps: { [key: string]: string } = {
  */
 export class Empty {
 
-    static create = (): Term<Object> => new Empty();
+    type = 'empty';
 
     compile(): Except<Object> {
 
@@ -38,12 +49,11 @@ export class Empty {
  */
 export class And {
 
+    type = 'and';
+
     connective = '$and';
 
-    constructor(public left: Term<Object>, public right: Term<Object>) { }
-
-    static create = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
-        : Term<Object> => new And(left, right);
+    constructor(public left: Term, public right: Term) { }
 
     compile(): Except<Object> {
 
@@ -72,10 +82,10 @@ export class And {
  */
 export class Or extends And {
 
+    type = 'and';
+
     connective = '$or';
 
-    static create = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
-        : Term<Object> => new Or(left, right);
 
 }
 
@@ -89,8 +99,10 @@ export class Filter {
         public operator: string,
         public value: Value) { }
 
-    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
-        : Term<Object> => new Filter(field, operator, value);
+    type = 'filter';
+
+    static create = (field: FieldName, operator: Operator, value: Value)
+        : Term => new Filter(field, operator, value);
 
     compile(): Except<Object> {
 
@@ -108,13 +120,16 @@ export class Filter {
  * Match
  */
 export class Match {
+
     constructor(
         public field: string,
         public operator: string,
         public value: Value) { }
 
-    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
-        : Term<Object> => new Match(field, operator, value);
+    type = 'match';
+
+    static create = (field: FieldName, operator: Operator, value: Value)
+        : Term => new Match(field, operator, value);
 
     compile(): Except<Object> {
 
@@ -137,8 +152,10 @@ export class Match {
  */
 export class MatchCI extends Match {
 
-    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
-        : Term<Object> => new MatchCI(field, operator, value);
+    type = 'matchci';
+
+    static create = (field: FieldName, operator: Operator, value: Value)
+        : Term => new MatchCI(field, operator, value);
 
     compile(): Except<Object> {
 
@@ -165,3 +182,28 @@ const escapeR = (value: Value) => {
     return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 }
+
+/**
+ * requiredTerms all search-filters compilers must support.
+ */
+export const requiredTerms: TermFactory<Object> = {
+
+    empty(): Term {
+
+        return new Empty();
+
+    },
+
+    and(left: Term, right: Term): Term {
+
+        return new And(left, right);
+
+    },
+
+    or(left: Term, right: Term): Term {
+
+        return new Or(left, right);
+
+    }
+
+};

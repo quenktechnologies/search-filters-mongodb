@@ -1,13 +1,8 @@
 import { Object } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
-import { TermConstructorFactory } from '@quenk/search-filters/lib/compile/term';
 import { AvailablePolicies, EnabledPolicies } from '@quenk/search-filters/lib/compile/policy';
 import { Options, Source } from '@quenk/search-filters/lib/compile';
 export { AvailablePolicies, EnabledPolicies, Options };
-/**
- * requiredTerms all search-filters compilers must support.
- */
-export declare const requiredTerms: TermConstructorFactory<Object>;
 /**
  * availablePolicies this module ships with.
  */
@@ -22,8 +17,8 @@ export declare const availablePolicies: AvailablePolicies<Object>;
 export declare class MongoDBFilterCompiler {
     options: Partial<Options>;
     policies: AvailablePolicies<Object>;
-    terms: TermConstructorFactory<Object>;
-    constructor(options?: Partial<Options>, policies?: AvailablePolicies<Object>, terms?: TermConstructorFactory<Object>);
+    terms: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>;
+    constructor(options?: Partial<Options>, policies?: AvailablePolicies<Object>, terms?: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>);
     /**
      * compile a Source string into a filter according to the EnabledPolicies
      * provided.

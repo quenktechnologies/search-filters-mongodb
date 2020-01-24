@@ -1,9 +1,10 @@
 {
   "name": "@quenk/facets-mongodb",
   "version": "0.3.6",
-  "description": "Compiles a string into a MongoDB query filter",
+  "description": "search-filters compiler for mongodb targets.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": ["lib"],
   "scripts": {
     "test": "./node_modules/.bin/mocha --opts mocha.opts test/compile.ts"
   },
@@ -20,7 +21,7 @@
   },
   "dependencies": {
     "@quenk/noni": "^1.36.0",
-    "@quenk/search-filters": "^2.2.2",
+    "@quenk/search-filters": "^2.3.2",
     "@quenk/test": "^2.1.3"
   }
 }

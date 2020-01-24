@@ -1,5 +1,5 @@
 {
-  "name": "@quenk/facets-mongodb",
+  "name": "@quenk/search-filters-mongodb",
   "version": "1.0.2",
   "description": "search-filters compiler for mongodb targets.",
   "main": "lib/index.js",

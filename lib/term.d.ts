@@ -2,6 +2,11 @@ import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import { FieldName, Operator, Term as ITerm, TermFactory } from '@quenk/search-filters/lib/compile/term';
 export { FieldName, Operator };
+export declare const TYPE_AND = "and";
+export declare const TYPE_OR = "or";
+export declare const TYPE_FILTER = "filter";
+export declare const TYPE_MATCH = "match";
+export declare const TYPE_MATCH_CI = "matchci";
 /**
  * Term type specialised for this module.
  */
@@ -23,11 +28,10 @@ export declare class Empty {
  * And
  */
 export declare class And {
-    left: Term;
-    right: Term;
+    lhs: Term;
+    rhs: Term;
     type: string;
-    connective: string;
-    constructor(left: Term, right: Term);
+    constructor(lhs: Term, rhs: Term);
     compile(): Except<Object>;
 }
 /**
@@ -35,7 +39,6 @@ export declare class And {
  */
 export declare class Or extends And {
     type: string;
-    connective: string;
 }
 /**
  * Filter

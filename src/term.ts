@@ -10,6 +10,12 @@ import {
 
 export { FieldName, Operator }
 
+export const TYPE_AND = 'and';
+export const TYPE_OR = 'or';
+export const TYPE_FILTER = 'filter';
+export const TYPE_MATCH = 'match';
+export const TYPE_MATCH_CI = 'matchci';
+
 /**
  * Term type specialised for this module.
  */
@@ -49,29 +55,43 @@ export class Empty {
  */
 export class And {
 
-    type = 'and';
+    type = TYPE_AND;
 
-    connective = '$and';
-
-    constructor(public left: Term, public right: Term) { }
+    constructor(public lhs: Term, public rhs: Term) { }
 
     compile(): Except<Object> {
 
-        let eitherL = this.left.compile();
+        let op = `$${this.type}`;
 
-        if (eitherL.isLeft())
-            return eitherL;
+        let eLeft = this.lhs.compile();
 
-        let eitherR = this.right.compile();
+        if (eLeft.isLeft()) return eLeft;
 
-        if (eitherR.isLeft())
-            return eitherR;
+        let eRight = this.rhs.compile();
 
-        return right({
+        if (eRight.isLeft()) return eRight;
 
-            [this.connective]: [eitherL.takeRight(), eitherR.takeRight()]
+        let lval = eLeft.takeRight();
+        let rval = eRight.takeRight();
 
-        });
+        if (this.lhs.type === this.type) {
+
+            if (this.rhs.type === this.type)
+                lval[op] = [...(<Object[]>lval[op]), ...(<Object[]>rval[op])];
+            else
+                (<Object[]>lval[op]).push(rval);
+
+            return right(lval);
+
+        } else {
+
+            return right({
+
+                [op]: [eLeft.takeRight(), eRight.takeRight()]
+
+            });
+
+        }
 
     }
 
@@ -82,9 +102,7 @@ export class And {
  */
 export class Or extends And {
 
-    type = 'and';
-
-    connective = '$or';
+    type = TYPE_OR;
 
 
 }
@@ -99,7 +117,7 @@ export class Filter {
         public operator: string,
         public value: Value) { }
 
-    type = 'filter';
+    type = TYPE_FILTER;
 
     static create = (field: FieldName, operator: Operator, value: Value)
         : Term => new Filter(field, operator, value);
@@ -126,7 +144,7 @@ export class Match {
         public operator: string,
         public value: Value) { }
 
-    type = 'match';
+    type = TYPE_MATCH;
 
     static create = (field: FieldName, operator: Operator, value: Value)
         : Term => new Match(field, operator, value);
@@ -152,7 +170,7 @@ export class Match {
  */
 export class MatchCI extends Match {
 
-    type = 'matchci';
+    type = TYPE_MATCH_CI;
 
     static create = (field: FieldName, operator: Operator, value: Value)
         : Term => new MatchCI(field, operator, value);
@@ -194,15 +212,15 @@ export const requiredTerms: TermFactory<Object> = {
 
     },
 
-    and(left: Term, right: Term): Term {
+    and(lhs: Term, rhs: Term): Term {
 
-        return new And(left, right);
+        return new And(lhs, rhs);
 
     },
 
-    or(left: Term, right: Term): Term {
+    or(lhs: Term, rhs: Term): Term {
 
-        return new Or(left, right);
+        return new Or(lhs, rhs);
 
     }
 

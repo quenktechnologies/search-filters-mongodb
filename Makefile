@@ -15,6 +15,5 @@ docs:
 	--excludeNotExported \
 	--excludePrivate \
 	--tsconfig lib/tsconfig.json \
-	--theme minimal && \
 	echo 'DO NOT DELETE!' > docs/.nojekyll 
 

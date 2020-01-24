@@ -1,80 +1,64 @@
-import { Object, Value } from '@quenk/noni/lib/data/json';
+import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
-import { Term, FilterInfo } from '@quenk/facets-dsl/lib/compile/term';
-import { Context } from '@quenk/facets-dsl/lib/compile/context';
+import { Term, FilterInfo } from '@quenk/search-filters/lib/compile/term';
+import { Context } from '@quenk/search-filters/lib/compile';
 /**
- * Empty compiles to an empty string.
+ * nativeOps maps the supported search-filters operators to mongodb operators.
+ */
+export declare const nativeOps: {
+    [key: string]: string;
+};
+/**
+ * Empty
  */
 export declare class Empty {
+    static create: () => Term<Object>;
     compile(): Except<Object>;
 }
 /**
- * And compiles to an SQL and.
+ * And
  */
 export declare class And {
     left: Term<Object>;
     right: Term<Object>;
-    op: string;
+    connective: string;
     constructor(left: Term<Object>, right: Term<Object>);
+    static create: (_: Context<Object>, left: Term<Object>, right: Term<Object>) => Term<Object>;
     compile(): Except<Object>;
 }
 /**
- * Or compiles to an SQL or.
+ * Or
  */
 export declare class Or extends And {
-    op: string;
+    connective: string;
+    static create: (_: Context<Object>, left: Term<Object>, right: Term<Object>) => Term<Object>;
 }
 /**
- * Operator compiles to the supported SQL comparison.
+ * Filter
  */
-export declare class Operator {
+export declare class Filter {
     field: string;
     operator: string;
     value: Value;
     constructor(field: string, operator: string, value: Value);
+    static create: (_: Context<Object>, { field, operator, value }: FilterInfo) => Term<Object>;
     compile(): Except<Object>;
 }
 /**
- * Regex condition.
+ * Match
  */
-export declare class Regex {
+export declare class Match {
     field: string;
     operator: string;
     value: Value;
     constructor(field: string, operator: string, value: Value);
+    static create: (_: Context<Object>, { field, operator, value }: FilterInfo) => Term<Object>;
     compile(): Except<Object>;
 }
 /**
- * Date condition
+ * MatchCI
  */
-export declare class Date {
-    field: string;
-    operator: string;
-    value: Value;
-    constructor(field: string, operator: string, value: Value);
+export declare class MatchCI extends Match {
+    static create: (_: Context<Object>, { field, operator, value }: FilterInfo) => Term<Object>;
     compile(): Except<Object>;
 }
-/**
- * and Term provider.
- */
-export declare const and: (_: Context<Object>, left: Term<Object>, right: Term<Object>) => Term<Object>;
-/**
- * or Term provider.
- */
-export declare const or: (_: Context<Object>, left: Term<Object>, right: Term<Object>) => Term<Object>;
-/**
- * empty Term provider.
- */
-export declare const empty: () => Term<Object>;
-/**
- * operator Term provider.
- */
-export declare const operator: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
-/**
- * regex term provider
- */
-export declare const regex: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;
-/**
- * date term provider
- */
-export declare const date: (_: Context<Object>, { field, operator, value }: FilterInfo<Value>) => Term<Object>;

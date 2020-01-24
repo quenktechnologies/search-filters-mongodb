@@ -1,11 +1,13 @@
-import * as moment from 'moment';
-import { Object, Value } from '@quenk/noni/lib/data/json';
+import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import { right } from '@quenk/noni/lib/data/either';
-import { Term, FilterInfo } from '@quenk/facets-dsl/lib/compile/term';
-import { Context } from '@quenk/facets-dsl/lib/compile/context';
+import { Term, FilterInfo } from '@quenk/search-filters/lib/compile/term';
+import { Context } from '@quenk/search-filters/lib/compile';
 
-const ops: { [key: string]: string } = {
+/**
+ * nativeOps maps the supported search-filters operators to mongodb operators.
+ */
+export const nativeOps: { [key: string]: string } = {
 
     '>': '$gt',
     '<': '$lt',
@@ -17,9 +19,11 @@ const ops: { [key: string]: string } = {
 }
 
 /**
- * Empty compiles to an empty string.
+ * Empty 
  */
 export class Empty {
+
+    static create = (): Term<Object> => new Empty();
 
     compile(): Except<Object> {
 
@@ -30,13 +34,16 @@ export class Empty {
 }
 
 /**
- * And compiles to an SQL and.
+ * And 
  */
 export class And {
 
-    op = '$and';
+    connective = '$and';
 
     constructor(public left: Term<Object>, public right: Term<Object>) { }
+
+    static create = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
+        : Term<Object> => new And(left, right);
 
     compile(): Except<Object> {
 
@@ -50,47 +57,88 @@ export class And {
         if (eitherR.isLeft())
             return eitherR;
 
-        return right({ [this.op]: [eitherL.takeRight(), eitherR.takeRight()] });
+        return right({
+
+            [this.connective]: [eitherL.takeRight(), eitherR.takeRight()]
+
+        });
 
     }
 
 }
 
 /**
- * Or compiles to an SQL or.
+ * Or 
  */
 export class Or extends And {
 
-    op = '$or';
+    connective = '$or';
+
+    static create = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
+        : Term<Object> => new Or(left, right);
 
 }
 
 /**
- * Operator compiles to the supported SQL comparison.
+ * Filter 
  */
-export class Operator {
+export class Filter {
 
     constructor(
         public field: string,
         public operator: string,
         public value: Value) { }
 
+    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
+        : Term<Object> => new Filter(field, operator, value);
+
     compile(): Except<Object> {
 
-        return right({ [this.field]: { [ops[this.operator]]: this.value } });
+        return right({
+
+            [this.field]: { [nativeOps[this.operator]]: this.value }
+
+        });
 
     }
 
 }
 
 /**
- * Regex condition.
+ * Match
  */
-export class Regex {
+export class Match {
     constructor(
         public field: string,
         public operator: string,
         public value: Value) { }
+
+    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
+        : Term<Object> => new Match(field, operator, value);
+
+    compile(): Except<Object> {
+
+        return right({
+
+            [this.field]: {
+
+                $regex: escapeR(this.value)
+
+            }
+
+        });
+
+    }
+
+}
+
+/**
+ * MatchCI
+ */
+export class MatchCI extends Match {
+
+    static create = (_: Context<Object>, { field, operator, value }: FilterInfo)
+        : Term<Object> => new MatchCI(field, operator, value);
 
     compile(): Except<Object> {
 
@@ -110,30 +158,6 @@ export class Regex {
 
 }
 
-/**
- * Date condition
- */
-export class Date {
-
-    constructor(
-        public field: string,
-        public operator: string,
-        public value: Value) { }
-
-    compile(): Except<Object> {
-
-        let d = moment.utc(String(this.value)).startOf('day');
-
-        return right({
-            [this.field]: {
-                [ops[this.operator]]: <Object><object>d.toDate()
-            }
-        });
-
-    }
-
-}
-
 const escapeR = (value: Value) => {
 
     let s = String(value);
@@ -141,41 +165,3 @@ const escapeR = (value: Value) => {
     return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 }
-
-/**
- * and Term provider.
- */
-export const and = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
-    : Term<Object> => new And(left, right);
-
-/**
- * or Term provider.
- */
-export const or = (_: Context<Object>, left: Term<Object>, right: Term<Object>)
-    : Term<Object> => new Or(left, right);
-
-/**
- * empty Term provider.
- */
-export const empty = (): Term<Object> => new Empty();
-
-/**
- * operator Term provider.
- */
-export const operator =
-    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
-        : Term<Object> => new Operator(field, operator, value);
-
-/**
- * regex term provider
- */
-export const regex =
-    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
-        : Term<Object> => new Regex(field, operator, value);
-
-/**
- * date term provider
- */
-export const date =
-    (_: Context<Object>, { field, operator, value }: FilterInfo<Value>)
-        : Term<Object> => new Date(field, operator, value);

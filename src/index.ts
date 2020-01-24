@@ -1,66 +1,117 @@
-import { Object } from '@quenk/noni/lib/data/json';
+import * as term from './term';
+
+import { Object } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
-import { TermConstructors } from '@quenk/facets-dsl/lib/compile/term';
-import { Policies } from '@quenk/facets-dsl/lib/compile/context/policy';
-import { Context } from '@quenk/facets-dsl/lib/compile/context';
-import { Source, source2Term } from '@quenk/facets-dsl/lib/compile';
-import { and, or, empty, operator, regex, date } from './term';
+import { TermConstructorFactory } from '@quenk/search-filters/lib/compile/term';
+import {
+    AvailablePolicies,
+    EnabledPolicies
+} from '@quenk/search-filters/lib/compile/policy';
+import {
+    Options,
+    Source,
+    compile
+} from '@quenk/search-filters/lib/compile';
+import { newContext } from '@quenk/search-filters/lib/compile';
+import { merge } from '@quenk/noni/lib/data/record';
+
+export { AvailablePolicies, EnabledPolicies, Options }
 
 /**
- * defaultTerms for supporting the DSL.
+ * requiredTerms all search-filters compilers must support.
  */
-export const defaultTerms: TermConstructors<Object> = {
-    and, or, empty
+export const requiredTerms: TermConstructorFactory<Object> = {
+
+    and: term.And.create,
+
+    or: term.Or.create,
+
+    empty: term.Empty.create
+
 };
 
 /**
- * defaultPolicies that can be specified as strings instead of maps.
+ * availablePolicies this module ships with.
  */
-export const defaultPolicies: Policies<Object> = {
+export const availablePolicies: AvailablePolicies<Object> = {
 
     number: {
 
         type: 'number',
-        operators: ['=', '>=', '<=', '<=', '>=', '<', '>'],
-        term: operator
+        operators: ['=', '<', '>', '>=', '<=', '!='],
+        term: term.Filter.create
+
+    },
+    boolean: {
+
+        type: 'boolean',
+        operators: ['=', '<', '>', '>=', '<=', '!='],
+        term: term.Filter.create
 
     },
     string: {
 
         type: 'string',
-        operators: ['='],
-        term: operator
+        operators: ['=', '!='],
+        term: term.Filter.create
+
+    },
+    date: {
+
+        type: 'date',
+        operators: ['=', '<', '>', '>=', '<=', '!='],
+        term: term.Filter.create
 
     },
     match: {
 
         type: 'string',
         operators: ['='],
-        term: regex
+        term: term.Match.create
 
     },
-    date: {
+    matchci: {
 
         type: 'string',
-        operators: [ '=', '>=', '<=', '<=', '>=', '<', '>'],
-        term: date
+        operators: ['='],
+        term: term.MatchCI.create
 
     }
 
 };
 
 /**
- * defaultOptions used during compilation.
+ * MongoDBFilterCompiler provides a compiler for converting a valid search-filters
+ * string into a valid mongodb filter. 
+ *
+ * These filters are intended to be used with the mongodb package and may not
+ * work with more opinionated libraries.
  */
-export const defaultOptions = {
+export class MongoDBFilterCompiler {
 
-    maxFilters: 100
+    constructor(
+        public options: Partial<Options> = {},
+        public policies: AvailablePolicies<Object> = {},
+        public terms = requiredTerms) { }
 
-};
+    /**
+     * compile a Source string into a filter according to the EnabledPolicies
+     * provided.
+     *
+     * The EnabledPolicies can make use of the builtin availableProperties
+     * exported by using the key name instead of a Policy definition.
+     * 
+     * The options and policies passed in the constructor are merged with 
+     * the defaults to allow additional options and AvailablePolicies to be
+     * specified.
+     */
+    compile(enabled: EnabledPolicies<Object>, src: Source): Except<Object> {
 
-/**
- * compile a string into a MongoDB query object.
- */
-export const compile = (ctx: Context<Object>, source: Source): Except<Object> =>
-    source2Term(ctx, source).chain(t => t.compile());
+        let { terms, policies, options } = this;
 
+        return compile(newContext(terms, merge(availablePolicies, policies),
+            options), enabled, src);
+
+    }
+
+}

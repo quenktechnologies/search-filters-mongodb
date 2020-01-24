@@ -64,6 +64,106 @@
 					<h1>Search Filters MongoDB</h1>
 				</a>
 				<p>search-filters compiler for mongodb targets</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh">npm install --save @quenk/search-filters-mongodb</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>This module provides a <a href="https://quenktechnologies.github.io/search-filters">@quenk/search-filters</a> compiler for generating
+					mongodb <a href="https://docs.mongodb.com/manual/reference/operator/query/">query operators</a>. It targets the <a href="https://mongodb.github.io/node-mongodb-native/3.5/api/">Node.js Driver API</a> particularly
+				the <code>Collection#find</code> method.</p>
+				<p>To compile a source string, create an instance of <code>MongoDBFilterCompiler</code>
+					and apply the <code>compile()</code> method giving it an <a href="https://quenktechnologies.github.io/search-filters/interfaces/_compile_policy_.enabledpolicies.html">EnabledPolicies</a> and
+				a valid source string.</p>
+				<a href="#available-policies" id="available-policies" style="color: inherit; text-decoration: none;">
+					<h3>Available Policies</h3>
+				</a>
+				<p>This module ships with the following <a href="https://quenktechnologies.github.io/search-filters/interfaces/_compile_policy_.availablepolicies.html">Available Policies</a> :</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Policy Name</th>
+							<th>Type</th>
+							<th>Operators</th>
+							<th>Notes</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>number</td>
+							<td>number</td>
+							<td>= &lt; &gt; &gt;= &lt;= !=</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>boolean</td>
+							<td>boolean</td>
+							<td>= &lt; &gt; &gt;= &lt;= !=</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>string</td>
+							<td>string</td>
+							<td>= !=</td>
+							<td>Tests equality.</td>
+						</tr>
+						<tr>
+							<td>match</td>
+							<td>string</td>
+							<td>=</td>
+							<td>Converts value to regex.</td>
+						</tr>
+						<tr>
+							<td>matchci</td>
+							<td>string</td>
+							<td>=</td>
+							<td>Case-insensitive &quot;match&quot;.</td>
+						</tr>
+						<tr>
+							<td>date</td>
+							<td>date</td>
+							<td>= &lt; &gt; &gt;= &lt;= !=</td>
+							<td>Actual value instanceof Date</td>
+						</tr>
+				</tbody></table>
+				<p>You can specify a policy name instead of a definition in <code>EnabledPolicies</code>
+					and it will be subsitituted at compile time.
+				Consult the <a href="https://quenktechnologies.github.io/search-filters">search-filters</a> docs for more information.</p>
+				<p>You can add additional <code>AvailablePolicies</code> by overriding the <code>policies</code>
+				argument of the <code>MongoDBFilterCompiler</code>.</p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h3>Example</h3>
+				</a>
+				<pre><code class="language-typecript">import {Value} from &#39;@quenk/noni/lib/data/jsonx&#39;;
+import {MongoDBFilterCompiler} from &#39;@quenk/search-filters-mongodb&#39;;
+import {FilterTerm} from &#39;@quenk/search-filters-mongodb/lib/term&#39;;
+
+const policies = {
+
+ name: &#39;matchci&#39;,
+
+ age: &#39;number&#39;
+
+ status: {
+
+   type: &#39;number&#39;,
+   operators: [&#39;=&#39;],
+   term: (field:string, op:string, value:Value ) =&gt; 
+       new FilterTerm(field, op, value)
+
+ }
+
+}
+
+const qry = &#39;(name:&quot;sana&quot; or name:=&quot;Murr&quot;) and age:&gt;20 and status:1&#39;;
+
+let mfc = new MongoDBFilterCompiler();
+
+let eResult = mfc.compile(qry);
+
+console.error(eResult.takeRight()); // Throws an error if compilation failed.
+</code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>

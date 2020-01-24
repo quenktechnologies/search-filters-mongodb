@@ -6,7 +6,7 @@ lib: $(shell find src -type f)
 	./node_modules/.bin/tsc --project lib
 
 # Generate typedoc documentation.
-.PHONY:
+.PHONY: docs
 docs: 
 	./node_modules/.bin/typedoc \
 	--mode modules \

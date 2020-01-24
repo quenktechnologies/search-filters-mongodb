@@ -1,1 +1,1 @@
-{"user.username":{"$regex":"\"faro\""}}
+{"user.username":{"$regex":"faro"}}

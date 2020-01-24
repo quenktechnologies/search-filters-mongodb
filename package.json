@@ -1,6 +1,6 @@
 {
   "name": "@quenk/facets-mongodb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "search-filters compiler for mongodb targets.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

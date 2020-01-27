@@ -1,12 +1,20 @@
 import { Object } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
-import { AvailablePolicies, EnabledPolicies } from '@quenk/search-filters/lib/compile/policy';
+import { AvailablePolicies as _AvailablePolicies, EnabledPolicies as _EnabledPolicies } from '@quenk/search-filters/lib/compile/policy';
 import { Options, Source } from '@quenk/search-filters/lib/compile';
-export { AvailablePolicies, EnabledPolicies, Options };
+export { Options };
+/**
+ * AvailablePolicies specialised for this module.
+ */
+export declare type AvailablePolicies = _AvailablePolicies<Object>;
+/**
+ * EnabledPolicies specialised to this module.
+ */
+export declare type EnabledPolicies = _EnabledPolicies<Object>;
 /**
  * availablePolicies this module ships with.
  */
-export declare const availablePolicies: AvailablePolicies<Object>;
+export declare const availablePolicies: AvailablePolicies;
 /**
  * MongoDBFilterCompiler provides a compiler for converting a valid search-filters
  * string into a valid mongodb filter.
@@ -16,9 +24,9 @@ export declare const availablePolicies: AvailablePolicies<Object>;
  */
 export declare class MongoDBFilterCompiler {
     options: Partial<Options>;
-    policies: AvailablePolicies<Object>;
+    policies: AvailablePolicies;
     terms: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>;
-    constructor(options?: Partial<Options>, policies?: AvailablePolicies<Object>, terms?: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>);
+    constructor(options?: Partial<Options>, policies?: AvailablePolicies, terms?: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>);
     /**
      * compile a Source string into a filter according to the EnabledPolicies
      * provided.
@@ -30,5 +38,5 @@ export declare class MongoDBFilterCompiler {
      * the defaults to allow additional options and AvailablePolicies to be
      * specified.
      */
-    compile(enabled: EnabledPolicies<Object>, src: Source): Except<Object>;
+    compile(enabled: EnabledPolicies, src: Source): Except<Object>;
 }

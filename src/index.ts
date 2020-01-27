@@ -3,8 +3,8 @@ import * as term from './term';
 import { Object } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import {
-    AvailablePolicies,
-    EnabledPolicies
+    AvailablePolicies as _AvailablePolicies,
+    EnabledPolicies as _EnabledPolicies
 } from '@quenk/search-filters/lib/compile/policy';
 import {
     Options,
@@ -14,12 +14,22 @@ import {
 import { newContext } from '@quenk/search-filters/lib/compile';
 import { merge } from '@quenk/noni/lib/data/record';
 
-export { AvailablePolicies, EnabledPolicies, Options }
+export { Options }
+
+/**
+ * AvailablePolicies specialised for this module.
+ */
+export type AvailablePolicies = _AvailablePolicies<Object>;
+
+/**
+ * EnabledPolicies specialised to this module.
+ */
+export type EnabledPolicies = _EnabledPolicies<Object>;
 
 /**
  * availablePolicies this module ships with.
  */
-export const availablePolicies: AvailablePolicies<Object> = {
+export const availablePolicies: AvailablePolicies = {
 
     number: {
 
@@ -77,7 +87,7 @@ export class MongoDBFilterCompiler {
 
     constructor(
         public options: Partial<Options> = {},
-        public policies: AvailablePolicies<Object> = {},
+        public policies: AvailablePolicies = {},
         public terms = term.requiredTerms) { }
 
     /**
@@ -91,7 +101,7 @@ export class MongoDBFilterCompiler {
      * the defaults to allow additional options and AvailablePolicies to be
      * specified.
      */
-    compile(enabled: EnabledPolicies<Object>, src: Source): Except<Object> {
+    compile(enabled: EnabledPolicies, src: Source): Except<Object> {
 
         let { terms, policies, options } = this;
 

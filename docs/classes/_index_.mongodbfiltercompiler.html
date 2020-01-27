@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MongoDBFilterCompiler | @quenk/facets-mongodb</title>
+	<title>MongoDBFilterCompiler | @quenk/search-filters-mongodb</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@quenk/facets-mongodb</a>
+					<a href="../index.html" class="title">@quenk/search-filters-mongodb</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -116,13 +116,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>MongoDBFilter<wbr>Compiler<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">&gt;</span>, policies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AvailablePolicies</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span>, terms<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TermFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSONXObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.mongodbfiltercompiler.html" class="tsd-signature-type">MongoDBFilterCompiler</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>MongoDBFilter<wbr>Compiler<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">&gt;</span>, policies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AvailablePolicies</span>, terms<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TermFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSONXObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.mongodbfiltercompiler.html" class="tsd-signature-type">MongoDBFilterCompiler</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/index.ts#L76">index.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/dc8fbb0/lib/index.ts#L86">index.ts:86</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -131,7 +131,7 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> policies: <span class="tsd-signature-type">AvailablePolicies</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> policies: <span class="tsd-signature-type">AvailablePolicies</span><span class="tsd-signature-symbol"> = {}</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> terms: <span class="tsd-signature-type">TermFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSONXObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = term.requiredTerms</span></h5>
@@ -150,17 +150,17 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/index.ts#L79">index.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/dc8fbb0/lib/index.ts#L89">index.ts:89</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="policies" class="tsd-anchor"></a>
 					<h3>policies</h3>
-					<div class="tsd-signature tsd-kind-icon">policies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AvailablePolicies</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">policies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AvailablePolicies</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/index.ts#L80">index.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/dc8fbb0/lib/index.ts#L90">index.ts:90</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -170,7 +170,7 @@
 					<div class="tsd-signature tsd-kind-icon">terms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TermFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSONXObject</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/index.ts#L81">index.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/dc8fbb0/lib/index.ts#L91">index.ts:91</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -181,13 +181,13 @@
 					<a name="compile" class="tsd-anchor"></a>
 					<h3>compile</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">compile<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EnabledPolicies</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">compile<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EnabledPolicies</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/27945a7/lib/index.ts#L94">index.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/dc8fbb0/lib/index.ts#L104">index.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -204,7 +204,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>enabled: <span class="tsd-signature-type">EnabledPolicies</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>enabled: <span class="tsd-signature-type">EnabledPolicies</span></h5>
 								</li>
 								<li>
 									<h5>src: <span class="tsd-signature-type">Source</span></h5>
@@ -256,8 +256,14 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#availablepolicies" class="tsd-kind-icon">Available<wbr>Policies</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#enabledpolicies" class="tsd-kind-icon">Enabled<wbr>Policies</a>
+					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
-						<a href="../modules/_index_.html#availablepolicies" class="tsd-kind-icon">available<wbr>Policies</a>
+						<a href="../modules/_index_.html#availablepolicies-1" class="tsd-kind-icon">available<wbr>Policies</a>
 					</li>
 				</ul>
 			</nav>

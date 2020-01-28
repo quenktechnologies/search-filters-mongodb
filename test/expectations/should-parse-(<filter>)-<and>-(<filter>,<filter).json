@@ -1,0 +1,1 @@
+{"$and":[{"type":{"$regex":"P"}},{"$and":[{"name":{"$regex":"Rakim","$options":"i"}},{"date_of_birth":{"$eq":"1968-01-28T00:00:00.000Z"}},{"trini_national_id":{"$eq":"1968012875"}}]}]}

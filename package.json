@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "@quenk/noni": "^1.36.0",
-    "@quenk/search-filters": "^2.3.4"
+    "@quenk/search-filters": "^2.3.7"
   }
 }

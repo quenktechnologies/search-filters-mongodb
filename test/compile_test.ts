@@ -35,9 +35,11 @@ const policies = {
 
     dob: 'date',
 
-    date_of_birth: 'string',
+    date_of_birth: 'date',
 
-    created_on: 'date'
+    created_on: 'date',
+
+    trini_national_id: 'string'
 
 }
 const mfc = new MongoDBFilterCompiler();

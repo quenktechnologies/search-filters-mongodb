@@ -1,6 +1,6 @@
 {
   "name": "@quenk/search-filters-mongodb",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "search-filters compiler for mongodb targets.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

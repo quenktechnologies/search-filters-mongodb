@@ -39,9 +39,12 @@ const policies = {
 
     created_on: 'date',
 
-    trini_national_id: 'string'
+    trini_national_id: 'string',
+
+    id: 'numbers'
 
 }
+
 const mfc = new MongoDBFilterCompiler();
 
 const compare = (tree: any, that: any) => {

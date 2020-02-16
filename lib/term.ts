@@ -32,6 +32,8 @@ export const nativeOps: { [key: string]: string } = {
     '!=': '$neq',
     '>=': '$gte',
     '<=': '$lte',
+    'in': '$in',
+    '!in': '$nin'
 
 }
 
@@ -103,7 +105,6 @@ export class And {
 export class Or extends And {
 
     type = TYPE_OR;
-
 
 }
 

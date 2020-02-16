@@ -135,48 +135,48 @@
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h3>Example</h3>
 				</a>
-				<pre><code class="language-typecript">import {Value} from &#39;@quenk/noni/lib/data/jsonx&#39;;
-import {MongoDBFilterCompiler} from &#39;@quenk/search-filters-mongodb&#39;;
-import {FilterTerm} from &#39;@quenk/search-filters-mongodb/lib/term&#39;;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {Value} <span class="hljs-keyword">from</span> <span class="hljs-string">'@quenk/noni/lib/data/jsonx'</span>;
+<span class="hljs-keyword">import</span> {MongoDBFilterCompiler} <span class="hljs-keyword">from</span> <span class="hljs-string">'@quenk/search-filters-mongodb'</span>;
+<span class="hljs-keyword">import</span> {FilterTerm} <span class="hljs-keyword">from</span> <span class="hljs-string">'@quenk/search-filters-mongodb/lib/term'</span>;
 
-const policies = {
+<span class="hljs-keyword">const</span> policies = {
 
- name: &#39;matchci&#39;,
+ name: <span class="hljs-string">'matchci'</span>,
 
- age: &#39;number&#39;
+ age: <span class="hljs-string">'number'</span>
 
  status: {
 
-   type: &#39;number&#39;,
-   operators: [&#39;=&#39;],
-   term: (field:string, op:string, value:Value ) =&gt; 
-       new FilterTerm(field, op, value)
+   <span class="hljs-keyword">type</span>: <span class="hljs-string">'number'</span>,
+   operators: [<span class="hljs-string">'='</span>],
+   term: <span class="hljs-function">(<span class="hljs-params">field:<span class="hljs-built_in">string</span>, op:<span class="hljs-built_in">string</span>, value:Value </span>) =&gt;</span> 
+       <span class="hljs-keyword">new</span> FilterTerm(field, op, value)
 
  }
 
 }
 
-const qry = &#39;(name:&quot;sana&quot; or name:=&quot;Murr&quot;) and age:&gt;20 and status:1&#39;;
+<span class="hljs-keyword">const</span> qry = <span class="hljs-string">'(name:"sana" or name:="Murr") and age:&gt;20 and status:1'</span>;
 
-let mfc = new MongoDBFilterCompiler();
+<span class="hljs-keyword">let</span> mfc = <span class="hljs-keyword">new</span> MongoDBFilterCompiler();
 
-let eResult = mfc.compile(qry);
+<span class="hljs-keyword">let</span> eResult = mfc.compile(qry);
 
-/* Logs the below or throws if an error occured. 
-  {&quot;$and&quot;:
+<span class="hljs-comment">/* Logs the below or throws if an error occured. 
+  {"$and":
     [
        {
-         &quot;$or&quot;:[
-            {&quot;name&quot;:{&quot;$regex&quot;:&quot;sana&quot;, $options:&quot;i&quot;}},
-            {&quot;name&quot;:{&quot;$regex&quot;:&quot;Murr&quot;, $options:&quot;i&quot;}}
+         "$or":[
+            {"name":{"$regex":"sana", $options:"i"}},
+            {"name":{"$regex":"Murr", $options:"i"}}
           ]
         },
-        {&quot;age&quot;:{&quot;$gt&quot;:20}},
-        {&quot;status&quot;:{&quot;$eq&quot;:1}}
+        {"age":{"$gt":20}},
+        {"status":{"$eq":1}}
     ]
    }
-*/
-console.log(eResult.takeRight());
+*/</span>
+<span class="hljs-built_in">console</span>.log(eResult.takeRight());
 </code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>

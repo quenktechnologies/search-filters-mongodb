@@ -41,7 +41,7 @@ argument of the `MongoDBFilterCompiler`.
 
 ### Example
 
-```typecript
+```typescript
 import {Value} from '@quenk/noni/lib/data/jsonx';
 import {MongoDBFilterCompiler} from '@quenk/search-filters-mongodb';
 import {FilterTerm} from '@quenk/search-filters-mongodb/lib/term';

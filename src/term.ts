@@ -148,7 +148,7 @@ export class DateFilter extends Filter {
 
     compile(): Except<Object> {
 
-        let value = moment(<Date>this.value);
+        let value = moment.utc(<Date>this.value);
         let op = this.operator;
 
         if (endDayOp.indexOf(op) > -1)

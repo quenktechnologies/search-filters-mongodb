@@ -37,11 +37,11 @@ const policies = {
 
     date_of_birth: 'date',
 
-    created_on: 'date',
+    created_on: 'datetime',
 
     trini_national_id: 'string',
 
-    id: 'numbers'
+    id: ['number', 'numbers']
 
 }
 

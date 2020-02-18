@@ -12,32 +12,40 @@ npm install --save @quenk/search-filters-mongodb
 ## Usage
 
 This module provides a [@quenk/search-filters][1] compiler for generating
-mongodb [query operators][2]. It targets the [Node.js Driver API][3] particularly
+mongodb [query filters][2] from a source string. It targets the [Node.js Driver API][3] particularly
 the `Collection#find` method.
 
-To compile a source string, create an instance of `MongoDBFilterCompiler`
-and apply the `compile()` method giving it an [EnabledPolicies][4] and 
-a valid source string.
+To compile a source string, create an instance of `MongoDBFilterCompiler`,
+and apply the `compile()` method. It takes an [EnabledPolicies][4] and 
+a valid search-filters source string.
 
 ### Available Policies
 
 This module ships with the following [Available Policies][5] :
 
-| Policy Name    | Type         | Operators      | Notes                       |
-|----------------|--------------|--------------- |-----------------------------|
-| number         | number       | = < > >= <= != |                             |
-| boolean        | boolean      | = < > >= <= != |                             |
-| string         | string       | = !=           | Tests equality.             |
-| match          | string       | =              | Converts value to regex.    |
-| matchci        | string       | =              | Case-insensitive "match".   |
-| date           | date         | = < > >= <= != | Actual value instanceof Date|    
+| Policy Name    | Type           | Operators      | Notes                              |
+|----------------|----------------|--------------- |----------------------------------- |
+| number         | number         | = < > >= <= != |                                    | 
+| boolean        | boolean        | = < > >= <= != |                                    |
+| string         | string         | = !=           | Tests equality.                    |
+| match          | string         | =              | Converts value to regex.           |
+| matchci        | string         | =              | Case-insensitive "match".          |
+| date           | date           | = < > >= <= != | Actual value instanceof Date (UTC) |    
+| datetime       | datetime       | = < > >= <= != | Actual value instanceof Date (UTC) |    
+| numbers        | list-number    | in !in         |                                    | 
+| booleans       | list-boolean   | in !in         |                                    |
+| strings        | list-string    | in !in         |                                    |
+| dates          | list-date      | in !in         |                                    |
+| datetimes      | list-datetime  | in !in         |                                    |    
 
-You can specify a policy name instead of a definition in `EnabledPolicies`
+
+You can specify one of the above policy names in your `EnabledPolicies`
 and it will be subsitituted at compile time. 
+
 Consult the [search-filters][1] docs for more information.
 
 You can add additional `AvailablePolicies` by overriding the `policies`
-argument of the `MongoDBFilterCompiler`.
+argument of the `MongoDBFilterCompiler` constructor.
 
 ### Example
 

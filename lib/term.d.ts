@@ -45,10 +45,17 @@ export declare class Or extends And {
  */
 export declare class Filter {
     field: string;
-    operator: string;
+    operator: Operator;
     value: Value;
-    constructor(field: string, operator: string, value: Value);
+    constructor(field: string, operator: Operator, value: Value);
     type: string;
+    static create: (field: string, operator: string, value: Value) => Term;
+    compile(): Except<Object>;
+}
+/**
+ * DateFilter
+ */
+export declare class DateFilter extends Filter {
     static create: (field: string, operator: string, value: Value) => Term;
     compile(): Except<Object>;
 }

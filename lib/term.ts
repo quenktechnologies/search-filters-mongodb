@@ -7,6 +7,7 @@ import {
     Term as ITerm,
     TermFactory
 } from '@quenk/search-filters/lib/compile/term';
+import moment = require('moment');
 
 export { FieldName, Operator }
 
@@ -115,7 +116,7 @@ export class Filter {
 
     constructor(
         public field: string,
-        public operator: string,
+        public operator: Operator,
         public value: Value) { }
 
     type = TYPE_FILTER;
@@ -128,6 +129,34 @@ export class Filter {
         return right({
 
             [this.field]: { [nativeOps[this.operator]]: this.value }
+
+        });
+
+    }
+
+}
+
+const endDayOp = ['>', '<='];
+
+/**
+ * DateFilter
+ */
+export class DateFilter extends Filter {
+
+    static create = (field: FieldName, operator: Operator, value: Value)
+        : Term => new DateFilter(field, operator, value);
+
+    compile(): Except<Object> {
+
+        let value = moment(<Date>this.value);
+        let op = this.operator;
+
+        if (endDayOp.indexOf(op) > -1)
+            value = value.endOf('day');
+
+        return right({
+
+            [this.field]: { [nativeOps[this.operator]]: value.toDate() }
 
         });
 

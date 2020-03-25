@@ -4,6 +4,7 @@ import { right } from '@quenk/noni/lib/data/either';
 import {
     FieldName,
     Operator,
+    FoldFunc,
     Term as ITerm,
     TermFactory
 } from '@quenk/search-filters/lib/compile/term';
@@ -39,6 +40,23 @@ export const nativeOps: { [key: string]: string } = {
 }
 
 /**
+ * BaseTerm
+ */
+export abstract class BaseTerm implements Term {
+
+    abstract type: string;
+
+    abstract compile(): Except<Object>;
+
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A {
+
+        return f(prev, this);
+
+    }
+
+}
+
+/**
  * Empty 
  */
 export class Empty {
@@ -51,16 +69,22 @@ export class Empty {
 
     }
 
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A {
+
+        return f(prev, this);
+
+    }
+
 }
 
 /**
  * And 
  */
-export class And {
+export class And extends BaseTerm {
 
     type = TYPE_AND;
 
-    constructor(public lhs: Term, public rhs: Term) { }
+    constructor(public lhs: Term, public rhs: Term) { super(); }
 
     compile(): Except<Object> {
 
@@ -98,6 +122,12 @@ export class And {
 
     }
 
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A {
+
+        return f(f(prev, this.lhs), this.rhs);
+
+    }
+
 }
 
 /**
@@ -112,12 +142,12 @@ export class Or extends And {
 /**
  * Filter 
  */
-export class Filter {
+export class Filter extends BaseTerm {
 
     constructor(
         public field: string,
         public operator: Operator,
-        public value: Value) { }
+        public value: Value) { super(); }
 
     type = TYPE_FILTER;
 
@@ -167,12 +197,12 @@ export class DateFilter extends Filter {
 /**
  * Match
  */
-export class Match {
+export class Match extends BaseTerm {
 
     constructor(
         public field: string,
         public operator: string,
-        public value: Value) { }
+        public value: Value) { super(); }
 
     type = TYPE_MATCH;
 

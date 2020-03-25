@@ -1,6 +1,6 @@
 import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
-import { FieldName, Operator, Term as ITerm, TermFactory } from '@quenk/search-filters/lib/compile/term';
+import { FieldName, Operator, FoldFunc, Term as ITerm, TermFactory } from '@quenk/search-filters/lib/compile/term';
 export { FieldName, Operator };
 export declare const TYPE_AND = "and";
 export declare const TYPE_OR = "or";
@@ -18,21 +18,31 @@ export declare const nativeOps: {
     [key: string]: string;
 };
 /**
+ * BaseTerm
+ */
+export declare abstract class BaseTerm implements Term {
+    abstract type: string;
+    abstract compile(): Except<Object>;
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A;
+}
+/**
  * Empty
  */
 export declare class Empty {
     type: string;
     compile(): Except<Object>;
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A;
 }
 /**
  * And
  */
-export declare class And {
+export declare class And extends BaseTerm {
     lhs: Term;
     rhs: Term;
     type: string;
     constructor(lhs: Term, rhs: Term);
     compile(): Except<Object>;
+    fold<A>(prev: A, f: FoldFunc<Object, A>): A;
 }
 /**
  * Or
@@ -43,7 +53,7 @@ export declare class Or extends And {
 /**
  * Filter
  */
-export declare class Filter {
+export declare class Filter extends BaseTerm {
     field: string;
     operator: Operator;
     value: Value;
@@ -62,7 +72,7 @@ export declare class DateFilter extends Filter {
 /**
  * Match
  */
-export declare class Match {
+export declare class Match extends BaseTerm {
     field: string;
     operator: string;
     value: Value;

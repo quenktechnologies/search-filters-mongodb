@@ -105,6 +105,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.mongodbfiltercompiler.html#compile" class="tsd-kind-icon">compile</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.mongodbfiltercompiler.html#toterm" class="tsd-kind-icon">to<wbr>Term</a></li>
 							</ul>
 						</section>
 					</div>
@@ -122,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/c976a82/lib/index.ts#L180">index.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L182">index.ts:182</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -150,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/c976a82/lib/index.ts#L183">index.ts:183</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L185">index.ts:185</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -160,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">policies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AvailablePolicies</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/c976a82/lib/index.ts#L184">index.ts:184</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L186">index.ts:186</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -170,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">terms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TermFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">JSONXObject</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/c976a82/lib/index.ts#L185">index.ts:185</a></li>
+							<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L187">index.ts:187</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -187,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/c976a82/lib/index.ts#L198">index.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L215">index.ts:215</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -211,6 +212,39 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="toterm" class="tsd-anchor"></a>
+					<h3>to<wbr>Term</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Term<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EnabledPolicies</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Term</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/quenktechnologies/facets-mongodb/blob/d511c81/lib/index.ts#L195">index.ts:195</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>toTerm is an alternative to direct compilation.</p>
+								</div>
+								<p>Instead of the compiled result a Term is produced that can be compiled
+								later.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enabled: <span class="tsd-signature-type">EnabledPolicies</span></h5>
+								</li>
+								<li>
+									<h5>src: <span class="tsd-signature-type">Source</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Except</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Term</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -251,6 +285,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_index_.mongodbfiltercompiler.html#compile" class="tsd-kind-icon">compile</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_index_.mongodbfiltercompiler.html#toterm" class="tsd-kind-icon">to<wbr>Term</a>
 							</li>
 						</ul>
 					</li>

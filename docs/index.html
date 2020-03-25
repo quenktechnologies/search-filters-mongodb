@@ -72,11 +72,11 @@
 					<h2>Usage</h2>
 				</a>
 				<p>This module provides a <a href="https://quenktechnologies.github.io/search-filters">@quenk/search-filters</a> compiler for generating
-					mongodb <a href="https://docs.mongodb.com/manual/reference/operator/query/">query operators</a>. It targets the <a href="https://mongodb.github.io/node-mongodb-native/3.5/api/">Node.js Driver API</a> particularly
+					mongodb <a href="https://docs.mongodb.com/manual/reference/operator/query/">query filters</a> from a source string. It targets the <a href="https://mongodb.github.io/node-mongodb-native/3.5/api/">Node.js Driver API</a> particularly
 				the <code>Collection#find</code> method.</p>
-				<p>To compile a source string, create an instance of <code>MongoDBFilterCompiler</code>
-					and apply the <code>compile()</code> method giving it an <a href="https://quenktechnologies.github.io/search-filters/interfaces/_compile_policy_.enabledpolicies.html">EnabledPolicies</a> and
-				a valid source string.</p>
+				<p>To compile a source string, create an instance of <code>MongoDBFilterCompiler</code>,
+					and apply the <code>compile()</code> method. It takes an <a href="https://quenktechnologies.github.io/search-filters/interfaces/_compile_policy_.enabledpolicies.html">EnabledPolicies</a> and
+				a valid search-filters source string.</p>
 				<a href="#available-policies" id="available-policies" style="color: inherit; text-decoration: none;">
 					<h3>Available Policies</h3>
 				</a>
@@ -124,14 +124,50 @@
 							<td>date</td>
 							<td>date</td>
 							<td>= &lt; &gt; &gt;= &lt;= !=</td>
-							<td>Actual value instanceof Date</td>
+							<td>Actual value instanceof Date (UTC)</td>
+						</tr>
+						<tr>
+							<td>datetime</td>
+							<td>datetime</td>
+							<td>= &lt; &gt; &gt;= &lt;= !=</td>
+							<td>Actual value instanceof Date (UTC)</td>
+						</tr>
+						<tr>
+							<td>numbers</td>
+							<td>list-number</td>
+							<td>in !in</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>booleans</td>
+							<td>list-boolean</td>
+							<td>in !in</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>strings</td>
+							<td>list-string</td>
+							<td>in !in</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>dates</td>
+							<td>list-date</td>
+							<td>in !in</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>datetimes</td>
+							<td>list-datetime</td>
+							<td>in !in</td>
+							<td></td>
 						</tr>
 				</tbody></table>
-				<p>You can specify a policy name instead of a definition in <code>EnabledPolicies</code>
-					and it will be subsitituted at compile time.
-				Consult the <a href="https://quenktechnologies.github.io/search-filters">search-filters</a> docs for more information.</p>
+				<p>You can specify one of the above policy names in your <code>EnabledPolicies</code>
+				and it will be subsitituted at compile time. </p>
+				<p>Consult the <a href="https://quenktechnologies.github.io/search-filters">search-filters</a> docs for more information.</p>
 				<p>You can add additional <code>AvailablePolicies</code> by overriding the <code>policies</code>
-				argument of the <code>MongoDBFilterCompiler</code>.</p>
+				argument of the <code>MongoDBFilterCompiler</code> constructor.</p>
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h3>Example</h3>
 				</a>
@@ -190,10 +226,10 @@
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class=" tsd-kind-module">
 						<a href="modules/_index_.html">&quot;index&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class=" tsd-kind-module">
 						<a href="modules/_term_.html">&quot;term&quot;</a>
 					</li>
 				</ul>
@@ -210,57 +246,12 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

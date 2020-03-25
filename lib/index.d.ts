@@ -2,6 +2,7 @@ import { Object } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import { AvailablePolicies as _AvailablePolicies, EnabledPolicies as _EnabledPolicies } from '@quenk/search-filters/lib/compile/policy';
 import { Options, Source } from '@quenk/search-filters/lib/compile';
+import { Term } from './term';
 export { Options };
 /**
  * AvailablePolicies specialised for this module.
@@ -27,6 +28,13 @@ export declare class MongoDBFilterCompiler {
     policies: AvailablePolicies;
     terms: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>;
     constructor(options?: Partial<Options>, policies?: AvailablePolicies, terms?: import("@quenk/search-filters/lib/compile/term").TermFactory<Object>);
+    /**
+     * toTerm is an alternative to direct compilation.
+     *
+     * Instead of the compiled result a Term is produced that can be compiled
+     * later.
+     */
+    toTerm(enabled: EnabledPolicies, src: Source): Except<Term>;
     /**
      * compile a Source string into a filter according to the EnabledPolicies
      * provided.

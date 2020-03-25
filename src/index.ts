@@ -9,10 +9,12 @@ import {
 import {
     Options,
     Source,
-    compile
+    source2Term
 } from '@quenk/search-filters/lib/compile';
 import { newContext } from '@quenk/search-filters/lib/compile';
 import { merge } from '@quenk/noni/lib/data/record';
+
+import { Term } from './term';
 
 export { Options }
 
@@ -185,6 +187,21 @@ export class MongoDBFilterCompiler {
         public terms = term.requiredTerms) { }
 
     /**
+     * toTerm is an alternative to direct compilation.
+     *
+     * Instead of the compiled result a Term is produced that can be compiled
+     * later.
+     */
+    toTerm(enabled: EnabledPolicies, src: Source): Except<Term> {
+
+        let { terms, policies, options } = this;
+
+        return source2Term(newContext(terms, merge(availablePolicies, policies),
+            options), enabled, src);
+
+    }
+
+    /**
      * compile a Source string into a filter according to the EnabledPolicies
      * provided.
      *
@@ -197,10 +214,7 @@ export class MongoDBFilterCompiler {
      */
     compile(enabled: EnabledPolicies, src: Source): Except<Object> {
 
-        let { terms, policies, options } = this;
-
-        return compile(newContext(terms, merge(availablePolicies, policies),
-            options), enabled, src);
+        return this.toTerm(enabled, src).chain(r => r.compile());
 
     }
 

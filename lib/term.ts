@@ -1,3 +1,5 @@
+import moment = require('moment');
+
 import { Object, Value } from '@quenk/noni/lib/data/jsonx';
 import { Except } from '@quenk/noni/lib/control/error';
 import { right } from '@quenk/noni/lib/data/either';
@@ -8,7 +10,6 @@ import {
     Term as ITerm,
     TermFactory
 } from '@quenk/search-filters/lib/compile/term';
-import moment = require('moment');
 
 export { FieldName, Operator }
 

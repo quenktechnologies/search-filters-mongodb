@@ -23,7 +23,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@quenk/noni": "^1.39.1",
-    "@quenk/search-filters": "^2.7.1"
+    "@quenk/noni": "^1.41.2",
+    "@quenk/search-filters": "^2.8.0"
   }
 }
